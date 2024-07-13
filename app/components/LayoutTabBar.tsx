@@ -23,7 +23,7 @@ function LayoutTabBar() {
             Meu Portfolio
           </Typography>
           <Button color="inherit">Home</Button>
-          <Button color="inherit">Sobre Mim</Button>
+          <Button color="inherit">Experiencias passadas</Button>
           <Button color="inherit">Meus Projetos</Button>
           <Button color="inherit">Contato</Button>
         </Toolbar>
