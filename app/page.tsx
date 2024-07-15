@@ -1,7 +1,8 @@
 "use client";
 import { Divider } from "@mui/material";
-import SobreMim from "./components/homeComponents/SobreMim";
+import AboutMe from "./components/homeComponents/AboutMe";
 import Title from "./components/homeComponents/Title";
+import ExperienceAreas from "./Experiences/Components/ExperienceAreas";
 //Lembrar de fazer:
 //Experiencias profissionais
 //Projetos pessoais
@@ -12,7 +13,9 @@ export default function Home() {
     <>
       <Title />
       <Divider sx={{ my: 5 }} />
-      <SobreMim />
+      <AboutMe />
+      <Divider sx={{ my: 5 }} />
+      <ExperienceAreas />
     </>
   );
 }
