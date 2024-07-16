@@ -18,14 +18,14 @@ function Title() {
       <Grid item lg={6} xs={12}>
         <Box sx={{ height: "100%" }}>
           <Box title="Bem vindo ao meu portfolio" />
-          <Typography variant="h2">Ola, sou Lucas </Typography>
+          <Typography variant="h2">Olá, sou Lucas </Typography>
           <Typography
             variant="h5"
             textAlign="justify"
             sx={{ textJustify: "inter-character" }}
           >
             Este portfolio tem como objetivo mostrar minhas experiencias
-            pessoais e profissionais como progrmador, listando e demonstrando
+            pessoais e profissionais como programador, listando e demonstrando
             meus conhecimentos em diversas áreas e com diferentes linguagens
           </Typography>
           <Box sx={{ mt: 3, display: "flex", justifyContent: "right", gap: 3 }}>
@@ -48,7 +48,7 @@ function Title() {
             <Image
               style={{ width: "50%", height: "50%", objectFit: "cover" }} // optional
               alt="Programador"
-              src="/DeveloperSvg.svg"
+              src="/images/DeveloperSvg.svg"
               width={0}
               height={0}
               sizes="100vw"
