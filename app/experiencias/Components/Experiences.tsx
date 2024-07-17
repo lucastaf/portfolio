@@ -11,14 +11,15 @@ import {
 import Image from "next/image";
 
 function Companys(props: GridProps & { experiences?: experience[] }) {
-  const { experiences: companies } = props;
+  const { experiences } = props;
   const isSmScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
+  console.log(experiences)
   return (
     <Grid container>
-      {companies ? (
-        companies?.map((item) => (
+      {experiences ? (
+        experiences?.map((item) => (
           <Grid item xs={12} lg={6} sx={{ mb: 3, display: "flex" }}>
             <Image
               src={item.icon}

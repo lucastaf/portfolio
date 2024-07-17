@@ -41,7 +41,7 @@ function LayoutTabBar() {
             <Link href={"/experiencias"} color="inherit">
               Experiências
             </Link>
-            <Link href={"/"} color="inherit">
+            <Link href={"/projetos"} color="inherit">
               Projetos
             </Link>
             <Link href={"/"} color="inherit">
