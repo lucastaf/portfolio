@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
+import useImagePath from "../hooks/useImagePath";
 
 function Title() {
   const theme = useTheme();
@@ -60,5 +61,4 @@ function Title() {
   );
 }
 
-
-export default Title
+export default Title;

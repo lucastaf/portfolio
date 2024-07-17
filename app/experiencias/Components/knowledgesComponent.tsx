@@ -1,6 +1,7 @@
 //linguagens - Javascript, css, html, python , c, c++, c#, java, php, vba, typescript
 "use client";
 import { knowledge } from "@/app/components/dataTypes";
+import useImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   CircularProgress,
@@ -23,7 +24,12 @@ function KnowledgesComponent(props: GridProps & { knowledges?: knowledge[] }) {
       {knowledges ? (
         knowledges?.map((item) => (
           <Grid item lg={3} md={6} xs={12} sx={{ my: 3, display: "flex" }}>
-            <Image src={item.icon} width={80} height={80} alt={item.name} />
+            <Image
+              src={useImagePath(item.icon)}
+              width={80}
+              height={80}
+              alt={item.name}
+            />
             <Box sx={{ ml: 2 }}>
               <Typography variant="h4">{item.name}</Typography>
               <Rating

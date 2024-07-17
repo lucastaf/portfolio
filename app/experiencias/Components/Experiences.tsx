@@ -1,4 +1,5 @@
 import { experience } from "@/app/components/dataTypes";
+import useImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   CircularProgress,
@@ -15,14 +16,13 @@ function Companys(props: GridProps & { experiences?: experience[] }) {
   const isSmScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
-  console.log(experiences)
   return (
     <Grid container>
       {experiences ? (
         experiences?.map((item) => (
           <Grid item xs={12} lg={6} sx={{ mb: 3, display: "flex" }}>
             <Image
-              src={item.icon}
+              src={useImagePath(item.icon)}
               width={isSmScreen ? 60 : 100}
               height={isSmScreen ? 60 : 100}
               alt={item.name}
