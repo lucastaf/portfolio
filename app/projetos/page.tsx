@@ -1,7 +1,5 @@
 "use client";
 import { Box } from "@mui/material";
-import Image from "next/image";
-import useImagePath from "../components/hooks/useImagePath";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { project } from "../components/dataTypes";
