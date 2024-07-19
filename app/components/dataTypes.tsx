@@ -10,9 +10,11 @@ export type project = {
     name : string,
     icon : string,
     status : string,
+    link : string,
+    time: string,
     type : string,
     knowledges : string[],
-    description : string
+    description : string,
 }
 
 export type experience = {

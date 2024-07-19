@@ -11,27 +11,36 @@ function Projects(props: { projects: project[] }) {
       {projects.length ? (
         projects.map((item) => (
           <Box sx={{ mb: 3, display: "flex" }}>
-            <Image
-              style={{
-                objectFit: "scale-down",
-                border: "1px solid white",
-                background: "rgba(128, 128, 128, 0.3)",
-                marginRight: 10,
+            <Link href={item.link} target="_blank">
+              <Image
+                style={{
+                  objectFit: "scale-down",
+                  border: "1px solid white",
+                  background: "rgba(128, 128, 128, 0.3)",
+                  marginRight: 10,
+                }}
+                src={useImagePath(item.icon)}
+                width={300}
+                height={200}
+                alt={item.name}
+              />
+            </Link>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
               }}
-              src={useImagePath(item.icon)}
-              width={300}
-              height={200}
-              alt={item.name}
-            />
-            <Box>
+            >
               <Box>
                 <Typography variant="h4">{item.name}</Typography>
-                <Typography variant="h6">Status: {item.status}</Typography>
+                <Typography variant="h6">Criado em: {item.time}</Typography>
+                <Typography variant="subtitle1">Status: {item.status}</Typography>
                 <Typography variant="subtitle1">
                   Descrição: {item.description}
                 </Typography>
               </Box>
-              <Box sx={{display:'flex'}}>
+              <Box sx={{ display: "flex", mt: 2 }}>
                 <Typography variant="subtitle1">
                   Conhecimentos utilizados:{" "}
                 </Typography>
