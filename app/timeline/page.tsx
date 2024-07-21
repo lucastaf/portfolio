@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { timeline } from "../components/dataTypes";
-import TimeLineComponent from "./components/Timeline";
+import TimeLineComponent from "../components/pagesComponents/Timeline";
 
 function TimeLine() {
   const [data, setData] = useState<timeline[]>([]);

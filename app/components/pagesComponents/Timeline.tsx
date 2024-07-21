@@ -11,6 +11,7 @@ import {
   Accordion,
   AccordionSummary,
   Box,
+  Button,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -30,12 +31,20 @@ function TimeLineComponent(props: { data: timeline[] }) {
         onClose={() => {
           setDialogOpen(false);
         }}
+        disableScrollLock
       >
         <DialogTitle>
           <Typography variant="h5">{dialogData?.name}</Typography>
         </DialogTitle>
         <DialogContent>
           <Typography>{dialogData?.description}</Typography>
+          {dialogData?.link && (
+            <Box sx={{ display: "flex", justifyContent: "end", mt: 3 }}>
+              <Link href={dialogData?.link}>
+                <Button variant="outlined">Abrir Link</Button>
+              </Link>
+            </Box>
+          )}
         </DialogContent>
       </Dialog>
       <Timeline position="alternate">

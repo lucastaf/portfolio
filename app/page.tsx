@@ -2,7 +2,7 @@
 import { Divider } from "@mui/material";
 import AboutMe from "./components/homeComponents/AboutMe";
 import Title from "./components/homeComponents/Title";
-import ExperienceAreas from "./experiencias/Components/knowledgesComponent";
+import ExperienceAreas from "./components/pagesComponents/knowledgesComponent";
 //Lembrar de fazer:
 //Experiencias profissionais
 //Projetos pessoais

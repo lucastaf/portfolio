@@ -16,7 +16,7 @@ import Image from "next/image";
 //Frameworks - React, appScript, Next, dotnet, godot, gameMaker, Excel, Vs code, laravel
 //Procurar - Excel, gamemaker, appscript
 
-function KnowledgesComponent(props: GridProps & { knowledges?: knowledge[] }) {
+function KnowledgesComponent(props: { knowledges?: knowledge[] }) {
   const { knowledges } = props;
   const theme = useTheme();
   return (

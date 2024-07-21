@@ -35,7 +35,9 @@ function Projects(props: { projects: project[] }) {
               <Box>
                 <Typography variant="h4">{item.name}</Typography>
                 <Typography variant="h6">Criado em: {item.time}</Typography>
-                <Typography variant="subtitle1">Status: {item.status}</Typography>
+                <Typography variant="subtitle1">
+                  Status: {item.status}
+                </Typography>
                 <Typography variant="subtitle1">
                   Descrição: {item.description}
                 </Typography>
@@ -44,13 +46,16 @@ function Projects(props: { projects: project[] }) {
                 <Typography variant="subtitle1">
                   Conhecimentos utilizados:{" "}
                 </Typography>
-                {item.knowledges.map((knowledge) => (
-                  <Link href={`/${knowledge}`}>
-                    <Button sx={{ ml: 1 }} size="small" variant="outlined">
-                      {knowledge}
-                    </Button>
-                  </Link>
-                ))}
+                {item.knowledges.map((knowledge) => {
+                  knowledge = knowledge.trim()
+                  return (
+                    <Link href={`/experiencias/${encodeURIComponent(knowledge)}`}>
+                      <Button sx={{ ml: 1 }} size="small" variant="outlined">
+                        {knowledge}
+                      </Button>
+                    </Link>
+                  );
+                })}
               </Box>
             </Box>
           </Box>

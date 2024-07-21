@@ -1,7 +1,7 @@
 "use client";
-import { Box, CircularProgress, Divider, Typography } from "@mui/material";
-import KnowledgesComponent from "./Components/knowledgesComponent";
-import Companys from "./Components/Experiences";
+import { Box,  Divider, Typography } from "@mui/material";
+import KnowledgesComponent from "../components/pagesComponents/knowledgesComponent";
+import Companys from "../components/pagesComponents/Experiences";
 import { useEffect, useState } from "react";
 import { experience, knowledge } from "../components/dataTypes";
 import axios from "axios";

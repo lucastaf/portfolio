@@ -26,7 +26,7 @@ export default async function getSheetTab(
   return await axios.get(URL, {
     params: {
       tab: tab,
-      filters: JSON.stringify(filters),
+      filter: JSON.stringify(filters),
     },
   });
 }

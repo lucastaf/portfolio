@@ -5,7 +5,7 @@ function getUrlFilter(url: string): sheetsFilter {
     const requestParams = new URLSearchParams(urlObject.searchParams);
     let params: sheetsFilter | any = {};
     requestParams.forEach((value, key) => {
-      params[key] = value;
+      params[key] = `${value}$|${value}["]`;
     });
     return params;
   }
