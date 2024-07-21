@@ -36,3 +36,5 @@ export type timeline = {
     time : string,
     link : string
 }
+
+export type dataStatus = "loading" | "success" | "error"

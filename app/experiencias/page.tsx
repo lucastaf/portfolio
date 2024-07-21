@@ -1,49 +1,60 @@
 "use client";
-import { Box,  Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import KnowledgesComponent from "../components/pagesComponents/knowledgesComponent";
-import Companys from "../components/pagesComponents/Experiences";
+import Experiences from "../components/pagesComponents/Experiences";
 import { useEffect, useState } from "react";
-import { experience, knowledge } from "../components/dataTypes";
+import { dataStatus, experience, knowledge } from "../components/dataTypes";
 import axios from "axios";
 
+type experienceStateType = {
+  companies: experience[];
+  education: experience[];
+  status: dataStatus;
+};
+
+type knowledgesStateType = {
+  languages: knowledge[];
+  frameworks: knowledge[];
+  others: knowledge[];
+  status: dataStatus;
+};
 function Knowledges() {
-  const [companyData, setCompanyData] = useState<experience[] | undefined>(
-    undefined
-  );
-  const [educationData, setEducationData] = useState<experience[] | undefined>(
-    undefined
-  );
-  const [languagesData, setLanguagesData] = useState<knowledge[] | undefined>(
-    undefined
-  );
-  const [frameworksData, setFrameworksData] = useState<knowledge[] | undefined>(
-    undefined
-  );
-  const [otherKnowledgesData, setOtherKnowledgesData] = useState<
-    knowledge[] | undefined
-  >(undefined);
+  const [experiencesData, setExperiencesData] = useState<experienceStateType>({
+    companies: [],
+    education: [],
+    status: "loading",
+  });
+  const [knowledgesData, setKnowledgesData] = useState<knowledgesStateType>({
+    languages: [],
+    frameworks: [],
+    others: [],
+    status: "loading",
+  });
   useEffect(() => {
     axios.get("/api/experiences").then((res) => {
-      setCompanyData(
-        res.data.filter((item: experience) => item.type == "emprego")
-      );
-      setEducationData(
-        res.data.filter((item: experience) => item.type == "educacao")
-      );
-    });
+      throw "deu ruim" 
+      const data: experience[] = res.data;
+      setExperiencesData({
+        companies: data.filter((item) => item.type == "emprego"),
+        education: data.filter((item) => item.type == "educacao"),
+        status: "success"
+      })
+    }).catch(e=>{
+      setExperiencesData(prevStatus => {
+        prevStatus.status = "error"
+        return prevStatus
+      })
+    })
     axios.get("/api/knowledges").then((res) => {
-      setLanguagesData(
-        res.data.filter((item: knowledge) => item.type == "Linguagem")
-      );
-      setFrameworksData(
-        res.data.filter((item: knowledge) => item.type == "Framework")
-      );
-      setOtherKnowledgesData(
-        res.data.filter(
-          (item: knowledge) =>
-            !(item.type?.match(/(.*Linguagem|.*Framework)/))
-        )
-      );
+      const data: knowledge[] = res.data;
+      setKnowledgesData({
+        languages: data.filter((item) => item.type == "Linguagem"),
+        frameworks: data.filter((item) => item.type == "Framework"),
+        others: data.filter(
+          (item) => !item.type?.match(/(.*Linguagem|.*Framework)/)
+        ),
+        status: "success"
+      });
     });
   }, []);
 
@@ -52,11 +63,11 @@ function Knowledges() {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Experiências Profissionais:
       </Typography>
-      <Companys experiences={companyData} />
+      <Experiences experiences={experiencesData?.companies} status={experiencesData.status} />
       <Typography variant="h4" sx={{ mb: 2 }}>
         Formação:
       </Typography>
-      <Companys experiences={educationData} />
+      <Experiences experiences={experiencesData?.education} status={experiencesData.status} />
       <Divider />
       <Typography variant="h3" sx={{ mt: 2 }}>
         Meus Conhecimentos:
@@ -64,15 +75,15 @@ function Knowledges() {
       <Typography variant="h4" sx={{ mt: 2 }}>
         Linguagens:
       </Typography>
-      <KnowledgesComponent knowledges={languagesData} />
+      <KnowledgesComponent knowledges={knowledgesData?.languages} />
       <Typography variant="h4" sx={{ mt: 2 }}>
         Frameworks:
       </Typography>
-      <KnowledgesComponent knowledges={frameworksData} />
+      <KnowledgesComponent knowledges={knowledgesData?.frameworks} />
       <Typography variant="h4" sx={{ mt: 2 }}>
         Outros conhecimentos:
       </Typography>
-      <KnowledgesComponent knowledges={otherKnowledgesData} />
+      <KnowledgesComponent knowledges={knowledgesData?.others} />
     </Box>
   );
 }

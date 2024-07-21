@@ -8,15 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 function LayoutTabBar() {
-  const router = useRouter();
-  function redirectTo(route: string) {
-    return () => {
-      router.push(route);
-    };
-  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>

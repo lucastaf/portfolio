@@ -1,24 +1,24 @@
-import { experience } from "@/app/components/dataTypes";
+import { dataStatus, experience } from "@/app/components/dataTypes";
 import useImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   CircularProgress,
   Grid,
-  GridProps,
   Theme,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import Image from "next/image";
+import ErrorComponent from "../ErrorComponents";
 
-function Companys(props: GridProps & { experiences?: experience[] }) {
-  const { experiences } = props;
+function Experiences(props: { experiences: experience[] | undefined; status: dataStatus }) {
+  const { experiences, status } = props;
   const isSmScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
   return (
     <Grid container>
-      {experiences ? (
+      {status == "success" ? (
         experiences?.map((item) => (
           <Grid item xs={12} lg={6} sx={{ mb: 3, display: "flex" }}>
             <Image
@@ -38,7 +38,7 @@ function Companys(props: GridProps & { experiences?: experience[] }) {
             </Box>
           </Grid>
         ))
-      ) : (
+      ) : status == "loading" ? (
         <Box
           sx={{
             display: "flex",
@@ -49,9 +49,11 @@ function Companys(props: GridProps & { experiences?: experience[] }) {
         >
           <CircularProgress />
         </Box>
+      ) : (
+        <ErrorComponent />
       )}
     </Grid>
   );
 }
 
-export default Companys;
+export default Experiences;
