@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ paddingRight: "0" }}>
+      <body className={inter.className}>
         <ThemeProvider theme={darkTheme}>
           <LayoutTabBar />
           <main className={styles.main}>{children}</main>

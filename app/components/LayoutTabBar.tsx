@@ -40,7 +40,7 @@ function LayoutTabBar() {
             <Link href={"/timeline"} color="inherit">
               Timeline
             </Link>
-            <Link href={"/"} color="inherit">
+            <Link href={"/contato"} color="inherit">
               Contato
             </Link>
           </Box>
