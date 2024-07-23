@@ -1,5 +1,5 @@
 import { dataStatus, experience } from "@/app/components/dataTypes";
-import useImagePath from "@/app/components/hooks/useImagePath";
+import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   CircularProgress,
@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import ErrorComponent from "../ErrorComponents";
 
-function Experiences(props: { experiences: experience[] | undefined; status: dataStatus }) {
+function Experiences(props: { experiences: experience[]; status: dataStatus }) {
   const { experiences, status } = props;
   const isSmScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
@@ -19,10 +19,10 @@ function Experiences(props: { experiences: experience[] | undefined; status: dat
   return (
     <Grid container>
       {status == "success" ? (
-        experiences?.map((item) => (
-          <Grid item xs={12} lg={6} sx={{ mb: 3, display: "flex" }}>
+        experiences?.map((item, index) => (
+          <Grid key={index} item xs={12} lg={6} sx={{ mb: 3, display: "flex" }}>
             <Image
-              src={useImagePath(item.icon)}
+              src={getImagePath(item.icon)}
               width={isSmScreen ? 60 : 100}
               height={isSmScreen ? 60 : 100}
               alt={item.name}

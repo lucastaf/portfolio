@@ -1,16 +1,17 @@
-import { project } from "@/app/components/dataTypes";
-import useImagePath from "@/app/components/hooks/useImagePath";
+import { dataStatus, project } from "@/app/components/dataTypes";
+import getImagePath from "@/app/components/hooks/useImagePath";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import ErrorComponent from "../ErrorComponents";
 
-function Projects(props: { projects: project[] }) {
-  const { projects } = props;
+function Projects(props: { projects: project[]; status: dataStatus }) {
+  const { projects, status } = props;
   return (
     <Box>
-      {projects.length ? (
-        projects.map((item) => (
-          <Box sx={{ mb: 3, display: "flex" }}>
+      {status == "success" ? (
+        projects.map((item, index) => (
+          <Box key={index} sx={{ mb: 3, display: "flex" }}>
             <Link href={item.link} target="_blank">
               <Image
                 style={{
@@ -19,7 +20,7 @@ function Projects(props: { projects: project[] }) {
                   background: "rgba(128, 128, 128, 0.3)",
                   marginRight: 10,
                 }}
-                src={useImagePath(item.icon)}
+                src={getImagePath(item.icon)}
                 width={300}
                 height={200}
                 alt={item.name}
@@ -46,10 +47,13 @@ function Projects(props: { projects: project[] }) {
                 <Typography variant="subtitle1">
                   Conhecimentos utilizados:{" "}
                 </Typography>
-                {item.knowledges.map((knowledge) => {
-                  knowledge = knowledge.trim()
+                {item.knowledges.map((knowledge, index) => {
+                  knowledge = knowledge.trim();
                   return (
-                    <Link href={`/experiencias/${encodeURIComponent(knowledge)}`}>
+                    <Link
+                      key={index}
+                      href={`/experiencias/${encodeURIComponent(knowledge)}`}
+                    >
                       <Button sx={{ ml: 1 }} size="small" variant="outlined">
                         {knowledge}
                       </Button>
@@ -60,10 +64,12 @@ function Projects(props: { projects: project[] }) {
             </Box>
           </Box>
         ))
-      ) : (
+      ) : status == "loading" ? (
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <CircularProgress />
         </Box>
+      ) : (
+        <ErrorComponent />
       )}
     </Box>
   );

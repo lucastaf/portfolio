@@ -1,31 +1,41 @@
 //linguagens - Javascript, css, html, python , c, c++, c#, java, php, vba, typescript
 "use client";
-import { knowledge } from "@/app/components/dataTypes";
-import useImagePath from "@/app/components/hooks/useImagePath";
+import { dataStatus, knowledge } from "@/app/components/dataTypes";
+import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   CircularProgress,
   Grid,
-  GridProps,
   Rating,
   Typography,
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
+import ErrorComponent from "../ErrorComponents";
 
 //Frameworks - React, appScript, Next, dotnet, godot, gameMaker, Excel, Vs code, laravel
 //Procurar - Excel, gamemaker, appscript
 
-function KnowledgesComponent(props: { knowledges?: knowledge[] }) {
-  const { knowledges } = props;
+function KnowledgesComponent(props: {
+  knowledges?: knowledge[];
+  status: dataStatus;
+}) {
+  const { knowledges, status } = props;
   const theme = useTheme();
   return (
     <Grid container spacing={3}>
-      {knowledges ? (
-        knowledges?.map((item) => (
-          <Grid item lg={3} md={6} xs={12} sx={{ my: 3, display: "flex" }}>
+      {status == "success" ? (
+        knowledges?.map((item, index) => (
+          <Grid
+            key={index}
+            item
+            lg={3}
+            md={6}
+            xs={12}
+            sx={{ my: 3, display: "flex" }}
+          >
             <Image
-              src={useImagePath(item.icon)}
+              src={getImagePath(item.icon)}
               width={80}
               height={80}
               alt={item.name}
@@ -41,7 +51,7 @@ function KnowledgesComponent(props: { knowledges?: knowledge[] }) {
             </Box>
           </Grid>
         ))
-      ) : (
+      ) : status == "loading" ? (
         <Box
           sx={{
             display: "flex",
@@ -52,6 +62,8 @@ function KnowledgesComponent(props: { knowledges?: knowledge[] }) {
         >
           <CircularProgress />
         </Box>
+      ) : (
+        <ErrorComponent />
       )}
     </Grid>
   );

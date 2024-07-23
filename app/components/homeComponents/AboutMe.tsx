@@ -49,8 +49,8 @@ function AboutMe() {
         Atualmente as áreas nas quais ja trabalhei ou estudei sobre foram:
       </Typography>
       <List>
-        {Areas.map((item) => (
-          <ListItem>
+        {Areas.map((item, index) => (
+          <ListItem key={index}>
             <ListItemAvatar>
               <Icon icon="tabler:point-filled" />
             </ListItemAvatar>

@@ -1,4 +1,4 @@
-import { timeline } from "@/app/components/dataTypes";
+import { dataStatus, timeline } from "@/app/components/dataTypes";
 import {
   Timeline,
   TimelineConnector,
@@ -8,10 +8,9 @@ import {
   TimelineSeparator,
 } from "@mui/lab";
 import {
-  Accordion,
-  AccordionSummary,
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -19,9 +18,10 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+import ErrorComponent from "../ErrorComponents";
 
-function TimeLineComponent(props: { data: timeline[] }) {
-  const { data } = props;
+function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
+  const { data, status } = props;
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [dialogData, setDialogData] = useState<timeline>();
   return (
@@ -47,32 +47,47 @@ function TimeLineComponent(props: { data: timeline[] }) {
           )}
         </DialogContent>
       </Dialog>
-      <Timeline position="alternate">
-        {data.map((item) => (
-          <TimelineItem>
-            <TimelineSeparator>
-              <Link href={item.link} target="_blank">
-                <TimelineDot />
-              </Link>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent
-              sx={{
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                setDialogData(item);
-                setDialogOpen(true);
-              }}
-            >
-              <Box>
-                <Typography variant="h6">{item.name}</Typography>
-                <Typography>{item.time}</Typography>
-              </Box>
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
+      {status == "success" ? (
+        <Timeline position="alternate">
+          {data.map((item, index) => (
+            <TimelineItem key={index}>
+              <TimelineSeparator>
+                <Link href={item.link} target="_blank">
+                  <TimelineDot />
+                </Link>
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent
+                sx={{
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setDialogData(item);
+                  setDialogOpen(true);
+                }}
+              >
+                <Box>
+                  <Typography variant="h6">{item.name}</Typography>
+                  <Typography>{item.time}</Typography>
+                </Box>
+              </TimelineContent>
+            </TimelineItem>
+          ))}
+        </Timeline>
+      ) : status == "loading" ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            my: 5,
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <ErrorComponent />
+      )}
     </>
   );
 }

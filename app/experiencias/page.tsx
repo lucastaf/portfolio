@@ -31,31 +31,41 @@ function Knowledges() {
     status: "loading",
   });
   useEffect(() => {
-    axios.get("/api/experiences").then((res) => {
-      throw "deu ruim" 
-      const data: experience[] = res.data;
-      setExperiencesData({
-        companies: data.filter((item) => item.type == "emprego"),
-        education: data.filter((item) => item.type == "educacao"),
-        status: "success"
+    axios
+      .get("/api/experiences")
+      .then((res) => {
+        const data: experience[] = res.data;
+        setExperiencesData({
+          companies: data.filter((item) => item.type == "emprego"),
+          education: data.filter((item) => item.type == "educacao"),
+          status: "success",
+        });
       })
-    }).catch(e=>{
-      setExperiencesData(prevStatus => {
-        prevStatus.status = "error"
-        return prevStatus
-      })
-    })
-    axios.get("/api/knowledges").then((res) => {
-      const data: knowledge[] = res.data;
-      setKnowledgesData({
-        languages: data.filter((item) => item.type == "Linguagem"),
-        frameworks: data.filter((item) => item.type == "Framework"),
-        others: data.filter(
-          (item) => !item.type?.match(/(.*Linguagem|.*Framework)/)
-        ),
-        status: "success"
+      .catch((e) => {
+        setExperiencesData((prevStatus) => {
+          prevStatus.status = "error";
+          return prevStatus;
+        });
       });
-    });
+    axios
+      .get("/api/knowledges")
+      .then((res) => {
+        const data: knowledge[] = res.data;
+        setKnowledgesData({
+          languages: data.filter((item) => item.type == "Linguagem"),
+          frameworks: data.filter((item) => item.type == "Framework"),
+          others: data.filter(
+            (item) => !item.type?.match(/(.*Linguagem|.*Framework)/)
+          ),
+          status: "success",
+        });
+      })
+      .catch(() => {
+        setKnowledgesData((prevStatus) => {
+          prevStatus.status = "error";
+          return prevStatus;
+        });
+      });
   }, []);
 
   return (
@@ -63,11 +73,17 @@ function Knowledges() {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Experiências Profissionais:
       </Typography>
-      <Experiences experiences={experiencesData?.companies} status={experiencesData.status} />
+      <Experiences
+        experiences={experiencesData?.companies}
+        status={experiencesData.status}
+      />
       <Typography variant="h4" sx={{ mb: 2 }}>
         Formação:
       </Typography>
-      <Experiences experiences={experiencesData?.education} status={experiencesData.status} />
+      <Experiences
+        experiences={experiencesData?.education}
+        status={experiencesData.status}
+      />
       <Divider />
       <Typography variant="h3" sx={{ mt: 2 }}>
         Meus Conhecimentos:
@@ -75,15 +91,15 @@ function Knowledges() {
       <Typography variant="h4" sx={{ mt: 2 }}>
         Linguagens:
       </Typography>
-      <KnowledgesComponent knowledges={knowledgesData?.languages} />
+      <KnowledgesComponent knowledges={knowledgesData?.languages} status={knowledgesData.status} />
       <Typography variant="h4" sx={{ mt: 2 }}>
         Frameworks:
       </Typography>
-      <KnowledgesComponent knowledges={knowledgesData?.frameworks} />
+      <KnowledgesComponent knowledges={knowledgesData?.frameworks} status={knowledgesData.status} />
       <Typography variant="h4" sx={{ mt: 2 }}>
         Outros conhecimentos:
       </Typography>
-      <KnowledgesComponent knowledges={knowledgesData?.others} />
+      <KnowledgesComponent knowledges={knowledgesData?.others} status={knowledgesData.status} />
     </Box>
   );
 }
