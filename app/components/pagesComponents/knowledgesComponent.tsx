@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import ErrorComponent from "../ErrorComponents";
+import Link from "next/link";
 
 //Frameworks - React, appScript, Next, dotnet, godot, gameMaker, Excel, Vs code, laravel
 //Procurar - Excel, gamemaker, appscript
@@ -34,12 +35,14 @@ function KnowledgesComponent(props: {
             xs={12}
             sx={{ my: 3, display: "flex" }}
           >
-            <Image
-              src={getImagePath(item.icon)}
-              width={80}
-              height={80}
-              alt={item.name}
-            />
+            <Link href={`experiencias/${encodeURIComponent(item.name)}`}>
+              <Image
+                src={getImagePath(item.icon)}
+                width={80}
+                height={80}
+                alt={item.name}
+              />
+            </Link>
             <Box sx={{ ml: 2 }}>
               <Typography variant="h4">{item.name}</Typography>
               <Rating

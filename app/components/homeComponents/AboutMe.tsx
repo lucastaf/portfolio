@@ -1,5 +1,14 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Box, List, ListItem, ListItemAvatar, Typography } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Theme,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { Variant } from "@mui/material/styles/createTypography";
 
 function AboutMe() {
   const Areas = [
@@ -8,12 +17,15 @@ function AboutMe() {
     "Game making",
     "Algoritmos em geral",
   ];
-
+  const isMdScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
+  const textVaraitn : Variant = isMdScreen ? "subtitle1" : "h6"
   return (
-    <Box sx={{ maxWidth: "70%" }}>
+    <Box sx={{ maxWidth: isMdScreen ? "100%" : "70%" }}>
       <Typography variant="h3">Sobre mim:</Typography>
       <Typography
-        variant="h6"
+        variant={textVaraitn}
         textAlign="justify"
         sx={{ textJustify: "inter-character" }}
       >
@@ -24,9 +36,9 @@ function AboutMe() {
         desenvolvi uma grande afinidade com a linguagem JavaScript.
       </Typography>
       <Typography
-        variant="h6"
+        variant={textVaraitn}
         textAlign="justify"
-        sx={{ textJustify: "inter-character" }}
+        sx={{ textJustify: "inter-character", my: 2 }}
       >
         <Icon icon="ic:twotone-play-arrow" fontSize={30} /> Me destaco na
         adaptação com linguagens que não tive experiências previas. Em minhas
@@ -35,7 +47,7 @@ function AboutMe() {
         uma ferramenta nova dentro de poucas semanas.
       </Typography>
       <Typography
-        variant="h6"
+        variant={textVaraitn}
         textAlign="justify"
         sx={{ textJustify: "inter-character" }}
       >
@@ -45,7 +57,7 @@ function AboutMe() {
         aprofundei meus estudos na área, consequentemente obtive maior
         facilidade em dominar os algoritmos de programação.
       </Typography>
-      <Typography variant="h6" sx={{ mt: 3, ml: 3 }}>
+      <Typography variant="h6" sx={{ mt: 3, ml: isMdScreen ? 0 : 3 }}>
         Atualmente as áreas nas quais ja trabalhei ou estudei sobre foram:
       </Typography>
       <List>

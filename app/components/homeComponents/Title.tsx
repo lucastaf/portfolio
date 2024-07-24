@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
-import getImagePath from "../hooks/useImagePath";
+import { motion } from "framer-motion";
 
 function Title() {
   const theme = useTheme();
@@ -19,28 +19,44 @@ function Title() {
       <Grid item lg={6} xs={12}>
         <Box sx={{ height: "100%" }}>
           <Box title="Bem vindo ao meu portfolio" />
-          <Typography variant="h2">Olá, sou Lucas </Typography>
-          <Typography
-            variant="h5"
-            textAlign="justify"
-            sx={{ textJustify: "inter-character" }}
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 100,
+            }}
+            animate={{
+              opacity: 100,
+              y: 0,
+            }}
+            transition={{
+              duration: 1,
+            }}
           >
-            Este portfolio tem como objetivo mostrar minhas experiencias
-            pessoais e profissionais como programador, listando e demonstrando
-            meus conhecimentos em diversas áreas e com diferentes linguagens
-          </Typography>
-          <Box sx={{ mt: 3, display: "flex", justifyContent: "right", gap: 3 }}>
-            <Tooltip title="Linkedin">
-              <IconButton>
-                <Icon fontSize={50} icon="mdi:linkedin" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Github">
-              <IconButton>
-                <Icon fontSize={50} icon="mdi:github" />
-              </IconButton>
-            </Tooltip>
-          </Box>
+            <Typography variant="h2">Olá, sou Lucas </Typography>
+            <Typography
+              variant="h5"
+              textAlign="justify"
+              sx={{ textJustify: "inter-character" }}
+            >
+              Este portfolio tem como objetivo mostrar minhas experiencias
+              pessoais e profissionais como programador, listando e demonstrando
+              meus conhecimentos em diversas áreas e com diferentes linguagens
+            </Typography>
+            <Box
+              sx={{ mt: 3, display: "flex", justifyContent: "right", gap: 3 }}
+            >
+              <Tooltip title="Linkedin">
+                <IconButton>
+                  <Icon fontSize={50} icon="mdi:linkedin" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Github">
+                <IconButton>
+                  <Icon fontSize={50} icon="mdi:github" />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          </motion.div>
         </Box>
       </Grid>
       {!isSmScreen && (
