@@ -33,30 +33,43 @@ function Title() {
             }}
           >
             <Typography variant="h2">Olá, sou Lucas </Typography>
+          </motion.div>
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 100,
+            }}
+            animate={{
+              opacity: 100,
+              y: 0,
+            }}
+            transition={{
+              duration: 1,
+              delay:0.8
+            }}
+          >
             <Typography
               variant="h5"
-              textAlign="justify"
-              sx={{ textJustify: "inter-character" }}
+            //textAlign="justify"
+              //sx={{ textJustify: "inter-character" }}
             >
               Este portfolio tem como objetivo mostrar minhas experiencias
               pessoais e profissionais como programador, listando e demonstrando
               meus conhecimentos em diversas áreas e com diferentes linguagens
             </Typography>
-            <Box
-              sx={{ mt: 3, display: "flex", justifyContent: "right", gap: 3 }}
-            >
-              <Tooltip title="Linkedin">
-                <IconButton>
-                  <Icon fontSize={50} icon="mdi:linkedin" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Github">
-                <IconButton>
-                  <Icon fontSize={50} icon="mdi:github" />
-                </IconButton>
-              </Tooltip>
-            </Box>
           </motion.div>
+          <Box sx={{ mt: 3, display: "flex", justifyContent: "right", gap: 3 }}>
+            <Tooltip title="Linkedin">
+              <IconButton>
+                <Icon fontSize={50} icon="mdi:linkedin" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Github">
+              <IconButton>
+                <Icon fontSize={50} icon="mdi:github" />
+              </IconButton>
+            </Tooltip>
+          </Box>
         </Box>
       </Grid>
       {!isSmScreen && (

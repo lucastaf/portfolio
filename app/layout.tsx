@@ -10,6 +10,9 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
+  typography : {
+    fontFamily : "Tahoma, sans-serif"
+  }
 });
 
 const inter = Inter({ subsets: ["latin"] });

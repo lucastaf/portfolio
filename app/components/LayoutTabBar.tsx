@@ -1,15 +1,28 @@
 "use client";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   AppBar,
   Box,
   Button,
   IconButton,
+  Menu,
+  MenuItem,
+  Theme,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Link from "next/link";
+import { useState } from "react";
 
 function LayoutTabBar() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const isSmScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -27,27 +40,63 @@ function LayoutTabBar() {
               Meu Portfolio
             </Typography>
           </Link>
-          <Box sx={{gap:2, display:'flex'}}>
-            <Link href={"/"} color="inherit">
-              Home
-            </Link>
-            <Link href={"/experiencias"} color="inherit">
-              Experiências
-            </Link>
-            <Link href={"/projetos"} color="inherit">
-              Projetos
-            </Link>
-            <Link href={"/timeline"} color="inherit">
-              Timeline
-            </Link>
-            <Link href={"/contato"} color="inherit">
-              Contato
-            </Link>
-          </Box>
+          {isSmScreen ? (
+            <>
+              <IconButton onClick={handleClick}>
+                <Icon icon="material-symbols:menu" />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => {
+                  setAnchorEl(null);
+                }}
+              >
+                {LinkItens.map((item) => (
+                  <MenuItem>
+                    <Link href={item.link} color="inherit">
+                      {item.name}
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
+          ) : (
+            <Box sx={{ gap: 2, display: "flex" }}>
+              {LinkItens.map((item) => (
+                <Link href={item.link} color="inherit">
+                  {item.name}
+                </Link>
+              ))}
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
+
+const LinkItens: { name: string; link: string }[] = [
+  {
+    name: "Home",
+    link: "/",
+  },
+  {
+    name: "Experiências",
+    link: "/experiencias",
+  },
+  {
+    name: "Projetos",
+    link: "/projetos",
+  },
+  {
+    name: "Timeline",
+    link: "/timeline",
+  },
+  {
+    name: "Contato",
+    link: "/contato",
+  },
+];
 
 export default LayoutTabBar;

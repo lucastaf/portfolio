@@ -1,5 +1,5 @@
 "use client";
-import { Divider } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import AboutMe from "./components/homeComponents/AboutMe";
 import Title from "./components/homeComponents/Title";
 import ExperienceAreas from "./components/pagesComponents/knowledgesComponent";
@@ -12,31 +12,33 @@ import axios from "axios";
 //Sobre mim
 //Timeline
 export default function Home() {
-  const [experienceData, setExperienceData] = useState<knowledge[]>([])
-  const [dataStatus, setDataStatus] = useState<dataStatus>("loading")
+  const [experienceData, setExperienceData] = useState<knowledge[]>([]);
+  const [dataStatus, setDataStatus] = useState<dataStatus>("loading");
 
-  useEffect(()=>{
-
-    axios.get("/api/knowledges",{
-      params:{
-        type : "Linguagem"
-      }
-    }).then(res=>{
-      setExperienceData(res.data)
-      setDataStatus("success")
-    }).catch(()=>{
-      setDataStatus("error")
-    })
-  },[])
-
+  useEffect(() => {
+    axios
+      .get("/api/knowledges", {
+        params: {
+          type: "Linguagem",
+        },
+      })
+      .then((res) => {
+        setExperienceData(res.data);
+        setDataStatus("success");
+      })
+      .catch(() => {
+        setDataStatus("error");
+      });
+  }, []);
 
   return (
     <>
       <Title />
       <Divider sx={{ my: 5 }} />
-      <AboutMe />
-      <Divider sx={{ my: 5 }} />
+      <Typography variant="h4">Experiência em:</Typography>
       <ExperienceAreas knowledges={experienceData} status={dataStatus} />
+      <Divider sx={{ my: 5 }} />
+      <AboutMe />
     </>
   );
 }
