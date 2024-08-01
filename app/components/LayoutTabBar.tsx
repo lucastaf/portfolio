@@ -52,8 +52,8 @@ function LayoutTabBar() {
                   setAnchorEl(null);
                 }}
               >
-                {LinkItens.map((item) => (
-                  <MenuItem>
+                {LinkItens.map((item, idx) => (
+                  <MenuItem key={idx}>
                     <Link href={item.link} color="inherit">
                       {item.name}
                     </Link>
@@ -63,8 +63,8 @@ function LayoutTabBar() {
             </>
           ) : (
             <Box sx={{ gap: 2, display: "flex" }}>
-              {LinkItens.map((item) => (
-                <Link href={item.link} color="inherit">
+              {LinkItens.map((item, idx) => (
+                <Link key={idx} href={item.link} color="inherit">
                   {item.name}
                 </Link>
               ))}

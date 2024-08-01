@@ -19,6 +19,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import ErrorComponent from "../ErrorComponents";
+import { motion } from "framer-motion";
 
 function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
   const { data, status } = props;
@@ -40,7 +41,7 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
           <Typography>{dialogData?.description}</Typography>
           {dialogData?.link && (
             <Box sx={{ display: "flex", justifyContent: "end", mt: 3 }}>
-              <Link href={dialogData?.link}>
+              <Link href={dialogData?.link} target="_blank">
                 <Button variant="outlined">Abrir Link</Button>
               </Link>
             </Box>
@@ -52,9 +53,7 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
           {data.map((item, index) => (
             <TimelineItem key={index}>
               <TimelineSeparator>
-                <Link href={item.link} target="_blank">
-                  <TimelineDot />
-                </Link>
+                <TimelineDot />
                 <TimelineConnector />
               </TimelineSeparator>
               <TimelineContent
@@ -66,10 +65,17 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
                   setDialogOpen(true);
                 }}
               >
-                <Box>
+                <motion.div
+                  style={{
+                    transformOrigin: index % 2 ? "center right" : "center left", 
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                  }}
+                >
                   <Typography variant="h6">{item.name}</Typography>
                   <Typography>{item.time}</Typography>
-                </Box>
+                </motion.div>
               </TimelineContent>
             </TimelineItem>
           ))}

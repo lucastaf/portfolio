@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import ErrorComponent from "../ErrorComponents";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 //Frameworks - React, appScript, Next, dotnet, godot, gameMaker, Excel, Vs code, laravel
 //Procurar - Excel, gamemaker, appscript
@@ -27,31 +28,33 @@ function KnowledgesComponent(props: {
     <Grid container spacing={3}>
       {status == "success" ? (
         knowledges?.map((item, index) => (
-          <Grid
-            key={index}
-            item
-            lg={3}
-            md={6}
-            xs={12}
-            sx={{ my: 3, display: "flex" }}
-          >
-            <Link href={`experiencias/${encodeURIComponent(item.name)}`}>
-              <Image
-                src={getImagePath(item.icon)}
-                width={80}
-                height={80}
-                alt={item.name}
-              />
-            </Link>
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="h4">{item.name}</Typography>
-              <Rating
-                sx={{ color: theme.palette.text.primary }}
-                value={item.affinity}
-                readOnly
-                precision={0.1}
-              />
-            </Box>
+          <Grid key={index} item lg={3} md={6} xs={12}>
+            <motion.div
+            whileHover={{
+              scale:1.1
+            }}
+            >
+              <Link
+                href={`experiencias/${encodeURIComponent(item.name)}`}
+                style={{ display: "flex" }}
+              >
+                <Image
+                  src={getImagePath(item.icon)}
+                  width={80}
+                  height={80}
+                  alt={item.name}
+                />
+                <Box sx={{ ml: 2 }}>
+                  <Typography variant="h4">{item.name}</Typography>
+                  <Rating
+                    sx={{ color: theme.palette.text.primary }}
+                    value={item.affinity}
+                    readOnly
+                    precision={0.1}
+                  />
+                </Box>
+              </Link>
+            </motion.div>
           </Grid>
         ))
       ) : status == "loading" ? (

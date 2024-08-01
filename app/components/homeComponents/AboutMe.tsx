@@ -1,3 +1,4 @@
+"use client"
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Box,
@@ -10,7 +11,6 @@ import {
 } from "@mui/material";
 import { Variant } from "@mui/material/styles/createTypography";
 import { motion } from "framer-motion";
-import styles from "./AppearOnScroll.module.css"
 
 function AboutMe() {
   const Areas = [
@@ -24,7 +24,20 @@ function AboutMe() {
   );
   const textVaraitn: Variant = isMdScreen ? "subtitle1" : "h6";
   return (
-    <motion.div className={styles.block}>
+    <motion.div
+      initial={{
+        x: -50,
+        opacity: 0,
+      }}
+      whileInView={{
+        x: 0,
+        opacity: 1,
+      }}
+      viewport={{ once: true }}
+      transition={{
+        duration:2
+      }}
+    >
       <Box sx={{ maxWidth: isMdScreen ? "100%" : "70%" }}>
         <Typography variant="h3">Sobre mim:</Typography>
         <Typography

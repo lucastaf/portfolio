@@ -39,7 +39,7 @@ function DynamicKnowledge({ params }: { params: { knowledge: string } }) {
       .catch(() => {
         setExperienceStatus("error");
       });
-  }, []);
+  }, [params.knowledge]);
 
   return (
     <Box>
