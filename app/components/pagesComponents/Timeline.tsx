@@ -14,7 +14,9 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  Theme,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,6 +27,10 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
   const { data, status } = props;
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [dialogData, setDialogData] = useState<timeline>();
+  const isSmScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
+
   return (
     <>
       <Dialog
@@ -49,7 +55,7 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
         </DialogContent>
       </Dialog>
       {status == "success" ? (
-        <Timeline position="alternate">
+        <Timeline position="alternate" sx={{padding:0}}>
           {data.map((item, index) => (
             <TimelineItem key={index}>
               <TimelineSeparator>
@@ -67,14 +73,24 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
               >
                 <motion.div
                   style={{
-                    transformOrigin: index % 2 ? "center right" : "center left", 
+                    transformOrigin: index % 2 ? "center right" : "center left",
                   }}
                   whileHover={{
                     scale: 1.1,
                   }}
                 >
-                  <Typography variant="h6">{item.name}</Typography>
-                  <Typography>{item.time}</Typography>
+                  <Typography
+                    variant={isSmScreen ? "subtitle1" : "h6"}
+                    fontSize={isSmScreen ? "14px" : "20px"}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Typography
+                    variant={isSmScreen ? "subtitle2" : "body1"}
+                    fontSize={isSmScreen ? "12px" : "16px"}
+                  >
+                    {item.time}
+                  </Typography>
                 </motion.div>
               </TimelineContent>
             </TimelineItem>
