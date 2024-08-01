@@ -1,6 +1,6 @@
 "use client";
 import { Box, Divider, Typography } from "@mui/material";
-import KnowledgesComponent from "../components/pagesComponents/knowledgesComponent";
+import Knowledges from "../components/pagesComponents/Knowledges";
 import Experiences from "../components/pagesComponents/Experiences";
 import { useEffect, useState } from "react";
 import { dataStatus, experience, knowledge } from "../components/dataTypes";
@@ -18,7 +18,7 @@ type knowledgesStateType = {
   others: knowledge[];
   status: dataStatus;
 };
-function Knowledges() {
+function ExperiencesPage() {
   const [experiencesData, setExperiencesData] = useState<experienceStateType>({
     companies: [],
     education: [],
@@ -91,17 +91,17 @@ function Knowledges() {
       <Typography variant="h4" sx={{ mt: 2 }}>
         Linguagens:
       </Typography>
-      <KnowledgesComponent knowledges={knowledgesData?.languages} status={knowledgesData.status} />
+      <Knowledges knowledges={knowledgesData?.languages} status={knowledgesData.status} />
       <Typography variant="h4" sx={{ mt: 2 }}>
         Frameworks:
       </Typography>
-      <KnowledgesComponent knowledges={knowledgesData?.frameworks} status={knowledgesData.status} />
+      <Knowledges knowledges={knowledgesData?.frameworks} status={knowledgesData.status} />
       <Typography variant="h4" sx={{ mt: 2 }}>
         Outros conhecimentos:
       </Typography>
-      <KnowledgesComponent knowledges={knowledgesData?.others} status={knowledgesData.status} />
+      <Knowledges knowledges={knowledgesData?.others} status={knowledgesData.status} />
     </Box>
   );
 }
 
-export default Knowledges;
+export default ExperiencesPage;

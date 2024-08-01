@@ -1,7 +1,7 @@
 import { Divider, Typography } from "@mui/material";
 import AboutMe from "./components/homeComponents/AboutMe";
 import Title from "./components/homeComponents/Title";
-import ExperienceAreas from "./components/pagesComponents/knowledgesComponent";
+import ExperienceAreas from "./components/pagesComponents/Knowledges";
 import { dataStatus, knowledge } from "./components/dataTypes";
 import axios from "axios";
 import getSheetTab from "./api/components/getSheetTab";

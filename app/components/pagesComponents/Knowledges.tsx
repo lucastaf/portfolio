@@ -18,7 +18,7 @@ import { motion } from "framer-motion";
 //Frameworks - React, appScript, Next, dotnet, godot, gameMaker, Excel, Vs code, laravel
 //Procurar - Excel, gamemaker, appscript
 
-function KnowledgesComponent(props: {
+function Knowledges(props: {
   knowledges?: knowledge[];
   status: dataStatus;
 }) {
@@ -75,4 +75,4 @@ function KnowledgesComponent(props: {
   );
 }
 
-export default KnowledgesComponent;
+export default Knowledges;
