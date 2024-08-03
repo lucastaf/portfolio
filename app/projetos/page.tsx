@@ -1,28 +1,25 @@
-"use client";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { dataStatus, project } from "../components/dataTypes";
 import Projects from "../components/pagesComponents/Projects";
+import getSheetTab from "../api/components/getSheetTab";
 
-function Projetos() {
-  const [data, setData] = useState<project[]>([]);
-  const [dataStatus, setDataStatus] = useState<dataStatus>("loading");
-
-  useEffect(() => {
-    axios.get("/api/projects").then((res) => {
-      setData(res.data);
-      setDataStatus("success")
-    }).catch(()=>{
-      setDataStatus("error")
-    });
-  }, []);
+async function Projetos() {
+  const [data, dataStatus] = await getProjectPageData();
 
   return (
     <Box>
       <Projects projects={data} status={dataStatus} />
     </Box>
   );
+}
+
+async function getProjectPageData(): Promise<[project[], dataStatus]> {
+  try {
+    const projectData = (await getSheetTab("projects")).data;
+    return [projectData, "success"];
+  } catch {
+    return [[], "error"];
+  }
 }
 
 export default Projetos;

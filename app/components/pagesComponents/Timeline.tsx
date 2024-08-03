@@ -1,3 +1,4 @@
+"use client"
 import { dataStatus, timeline } from "@/app/components/dataTypes";
 import {
   Timeline,

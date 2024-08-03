@@ -1,60 +1,14 @@
-"use client";
 import { Box, Divider, Typography } from "@mui/material";
 import Knowledges from "../components/pagesComponents/Knowledges";
 import Experiences from "../components/pagesComponents/Experiences";
-import { useEffect, useState } from "react";
 import { dataStatus, experience, knowledge } from "../components/dataTypes";
-import axios from "axios";
+import getSheetTab from "../api/components/getSheetTab";
 
-function ExperiencesPage() {
-  const [experiencesData, setExperiencesData] = useState<experienceStateType>({
-    companies: [],
-    education: [],
-    status: "loading",
-  });
-  const [knowledgesData, setKnowledgesData] = useState<knowledgesStateType>({
-    languages: [],
-    frameworks: [],
-    others: [],
-    status: "loading",
-  });
-  useEffect(() => {
-    axios
-      .get("/api/experiences")
-      .then((res) => {
-        const data: experience[] = res.data;
-        setExperiencesData({
-          companies: data.filter((item) => item.type == "emprego"),
-          education: data.filter((item) => item.type == "educacao"),
-          status: "success",
-        });
-      })
-      .catch((e) => {
-        setExperiencesData((prevStatus) => {
-          prevStatus.status = "error";
-          return prevStatus;
-        });
-      });
-    axios
-      .get("/api/knowledges")
-      .then((res) => {
-        const data: knowledge[] = res.data;
-        setKnowledgesData({
-          languages: data.filter((item) => item.type == "Linguagem"),
-          frameworks: data.filter((item) => item.type == "Framework"),
-          others: data.filter(
-            (item) => !item.type?.match(/(.*Linguagem|.*Framework)/)
-          ),
-          status: "success",
-        });
-      })
-      .catch(() => {
-        setKnowledgesData((prevStatus) => {
-          prevStatus.status = "error";
-          return prevStatus;
-        });
-      });
-  }, []);
+async function ExperiencesPage() {
+  const [experiencesData, knowledgesData]: [
+    experienceStateType,
+    knowledgesStateType
+  ] = await getKnowledgePageData();
 
   return (
     <Box>
@@ -99,6 +53,44 @@ function ExperiencesPage() {
       />
     </Box>
   );
+}
+
+async function getKnowledgePageData(): Promise<
+  [experienceStateType, knowledgesStateType]
+> {
+  try {
+    const experiences: experience[] = (await getSheetTab("experiences")).data;
+    const knowledges: knowledge[] = (await getSheetTab("knowledge")).data;
+    return [
+      {
+        companies: experiences.filter((item) => item.type == "emprego"),
+        education: experiences.filter((item) => item.type == "educacao"),
+        status: "success",
+      },
+      {
+        languages: knowledges.filter((item) => item.type == "Linguagem"),
+        frameworks: knowledges.filter((item) => item.type == "Framework"),
+        others: knowledges.filter(
+          (item) => !item.type?.match(/(.*Linguagem|.*Framework)/)
+        ),
+        status: "success",
+      },
+    ];
+  } catch {
+    return [
+      {
+        companies: [],
+        education: [],
+        status: "error",
+      },
+      {
+        frameworks: [],
+        languages: [],
+        others: [],
+        status: "error",
+      },
+    ];
+  }
 }
 
 type experienceStateType = {

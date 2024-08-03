@@ -4,11 +4,7 @@ import Title from "./components/homeComponents/Title";
 import ExperienceAreas from "./components/pagesComponents/Knowledges";
 import { dataStatus, knowledge, projectTypes } from "./components/dataTypes";
 import getSheetTab from "./api/components/getSheetTab";
-//Lembrar de fazer:
-//Experiencias profissionais
-//Projetos pessoais
-//Sobre mim
-//Timeline
+
 export default async function Home() {
   const [KnowledgesData, dataStatus, projectAreas]: [knowledge[], dataStatus, projectTypes[]] =
     await getData();

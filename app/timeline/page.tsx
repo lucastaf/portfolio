@@ -1,32 +1,25 @@
-"use client";
-
 import { Box } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { dataStatus, timeline } from "../components/dataTypes";
 import TimeLineComponent from "../components/pagesComponents/Timeline";
+import getSheetTab from "../api/components/getSheetTab";
 
-function TimeLine() {
-  const [data, setData] = useState<timeline[]>([]);
-  const [dataStatus, setDataStatus] = useState<dataStatus>("loading");
-
-  useEffect(() => {
-    axios
-      .get("/api/timeline")
-      .then((res) => {
-        setData(res.data);
-        setDataStatus("success");
-      })
-      .catch(() => {
-        setDataStatus("error");
-      });
-  }, []);
+async function TimeLine() {
+  const [data, dataStatus] = await getTimeLinePageData();
 
   return (
     <Box>
       <TimeLineComponent data={data} status={dataStatus} />
     </Box>
   );
+}
+
+async function getTimeLinePageData(): Promise<[timeline[], dataStatus]> {
+  try {
+    const timeLineData = await getSheetTab("timeline");
+    return [timeLineData.data, "success"];
+  } catch {
+    return [[], "error"];
+  }
 }
 
 export default TimeLine;

@@ -1,8 +1,8 @@
+"use client"
 import { dataStatus, experience } from "@/app/components/dataTypes";
 import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
-  Button,
   Chip,
   CircularProgress,
   Dialog,

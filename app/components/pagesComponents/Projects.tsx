@@ -1,3 +1,4 @@
+"use client"
 import { dataStatus, project } from "@/app/components/dataTypes";
 import getImagePath from "@/app/components/hooks/useImagePath";
 import {
