@@ -15,7 +15,7 @@ async function Projetos() {
 
 async function getProjectPageData(): Promise<[project[], dataStatus]> {
   try {
-    const projectData = (await getSheetTab("projects")).data;
+    const projectData = await getSheetTab("projects");
     return [projectData, "success"];
   } catch {
     return [[], "error"];

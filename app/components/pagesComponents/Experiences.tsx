@@ -51,8 +51,8 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
               <Typography sx={{ mb: 1 }} variant="subtitle1">
                 {dialogData?.role}
               </Typography>
-              {dialogData?.knowledges.map((item) => (
-                <Link href={`experiencias/${encodeURIComponent(item)}`}>
+              {dialogData?.knowledges.map((item, index) => (
+                <Link key={index} href={`experiencias/${encodeURIComponent(item)}`}>
                   <Chip label={item} sx={{ mr: 1, mb: 1 }} />
                 </Link>
               ))}

@@ -16,7 +16,7 @@ async function TimeLine() {
 async function getTimeLinePageData(): Promise<[timeline[], dataStatus]> {
   try {
     const timeLineData = await getSheetTab("timeline");
-    return [timeLineData.data, "success"];
+    return [timeLineData, "success"];
   } catch {
     return [[], "error"];
   }

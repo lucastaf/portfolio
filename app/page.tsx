@@ -6,8 +6,11 @@ import { dataStatus, knowledge, projectTypes } from "./components/dataTypes";
 import getSheetTab from "./api/components/getSheetTab";
 
 export default async function Home() {
-  const [KnowledgesData, dataStatus, projectAreas]: [knowledge[], dataStatus, projectTypes[]] =
-    await getData();
+  const [KnowledgesData, dataStatus, projectAreas]: [
+    knowledge[],
+    dataStatus,
+    projectTypes[]
+  ] = await getData();
 
   return (
     <>
@@ -28,10 +31,10 @@ async function getData(): Promise<[knowledge[], dataStatus, projectTypes[]]> {
     const resKnowledge = await getSheetTab("knowledge", {
       type: "Linguagem",
     });
-    const resAreas = await getSheetTab("projectTypes")
+    const resAreas = await getSheetTab("projectTypes");
 
-    return [resKnowledge.data, "success", resAreas.data];
-  } catch (e) {
+    return [resKnowledge, "success", resAreas];
+  } catch {
     return [[], "error", []];
   }
 }

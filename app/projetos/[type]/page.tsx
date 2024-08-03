@@ -24,7 +24,7 @@ function ProjectsByType({ params }: { params: { type: string } }) {
       .catch(() => {
         setDataStatus("error");
       });
-  }, []);
+  }, [type]);
 
   return (
     <Box>

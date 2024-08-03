@@ -59,8 +59,8 @@ async function getKnowledgePageData(): Promise<
   [experienceStateType, knowledgesStateType]
 > {
   try {
-    const experiences: experience[] = (await getSheetTab("experiences")).data;
-    const knowledges: knowledge[] = (await getSheetTab("knowledge")).data;
+    const experiences: experience[] = await getSheetTab("experiences");
+    const knowledges: knowledge[] = await getSheetTab("knowledge");
     return [
       {
         companies: experiences.filter((item) => item.type == "emprego"),

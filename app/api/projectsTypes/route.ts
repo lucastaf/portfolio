@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import getSheetTab from "../components/getSheetTab";
+import getSheetTabUncached from "../components/getSheetTabUnchached";
 
 export async function GET(request: NextRequest) {
-  const resApi = await getSheetTab("projectTypes");
+  const resApi = await getSheetTabUncached("projectTypes");
 
   return new NextResponse(JSON.stringify(resApi.data), {
     status: 200,
