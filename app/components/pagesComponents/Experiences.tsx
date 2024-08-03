@@ -3,6 +3,7 @@ import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   Button,
+  Chip,
   CircularProgress,
   Dialog,
   DialogContent,
@@ -15,6 +16,7 @@ import Image from "next/image";
 import ErrorComponent from "../ErrorComponents";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
 function Experiences(props: { experiences: experience[]; status: dataStatus }) {
   const { experiences, status } = props;
@@ -36,18 +38,22 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
           >
             <Image
               src={getImagePath(dialogData?.icon)}
-              width={isSmScreen ? 60 : 150}
-              height={isSmScreen ? 60 : 150}
+              width={isSmScreen ? 80 : 150}
+              height={isSmScreen ? 80 : 150}
               alt={dialogData?.name ?? ""}
             />
-            <Box sx={{ ml: 2 }}>
+            <Box sx={{ ml: isSmScreen ? 0 : 2 }}>
               <Typography variant="h4">{dialogData?.name}</Typography>
-              <Typography variant="h6">
+              <Typography variant={isSmScreen ? "subtitle1" : "h6"}>
                 {dialogData?.location} , {dialogData?.time}
               </Typography>
-              <Typography variant="subtitle1">{dialogData?.role}</Typography>
+              <Typography sx={{ mb: 1 }} variant="subtitle1">
+                {dialogData?.role}
+              </Typography>
               {dialogData?.knowledges.map((item) => (
-                <Button variant="outlined" size="small" sx={{m:1}} >{item}</Button>
+                <Link href={`experiencias/${encodeURIComponent(item)}`}>
+                  <Chip label={item} sx={{ mr: 1, mb: 1 }} />
+                </Link>
               ))}
               <Typography variant="body1">{dialogData?.description}</Typography>
             </Box>
@@ -77,7 +83,7 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
                 <Typography variant="h5" fontSize={isSmScreen ? 18 : 25}>
                   {item.name}
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant={isSmScreen ? "subtitle1" : "h6"}>
                   {item.location}, {item.time}
                 </Typography>
                 <Typography variant="body1">{item.role}</Typography>

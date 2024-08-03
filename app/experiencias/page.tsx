@@ -6,18 +6,7 @@ import { useEffect, useState } from "react";
 import { dataStatus, experience, knowledge } from "../components/dataTypes";
 import axios from "axios";
 
-type experienceStateType = {
-  companies: experience[];
-  education: experience[];
-  status: dataStatus;
-};
 
-type knowledgesStateType = {
-  languages: knowledge[];
-  frameworks: knowledge[];
-  others: knowledge[];
-  status: dataStatus;
-};
 function ExperiencesPage() {
   const [experiencesData, setExperiencesData] = useState<experienceStateType>({
     companies: [],
@@ -68,6 +57,7 @@ function ExperiencesPage() {
       });
   }, []);
 
+  
   return (
     <Box>
       <Typography variant="h4" sx={{ mb: 2 }}>
@@ -84,7 +74,7 @@ function ExperiencesPage() {
         experiences={experiencesData?.education}
         status={experiencesData.status}
       />
-      <Divider />
+      <Divider sx={{mt:2}} />
       <Typography variant="h3" sx={{ mt: 2 }}>
         Meus Conhecimentos:
       </Typography>
@@ -103,5 +93,18 @@ function ExperiencesPage() {
     </Box>
   );
 }
+
+type experienceStateType = {
+  companies: experience[];
+  education: experience[];
+  status: dataStatus;
+};
+
+type knowledgesStateType = {
+  languages: knowledge[];
+  frameworks: knowledge[];
+  others: knowledge[];
+  status: dataStatus;
+};
 
 export default ExperiencesPage;
