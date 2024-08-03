@@ -37,4 +37,8 @@ export type timeline = {
     link? : string
 }
 
+export type projectTypes = {
+    title : string,
+    name : string
+}
 export type dataStatus = "loading" | "success" | "error"

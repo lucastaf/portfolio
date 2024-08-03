@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Box,
@@ -11,14 +11,11 @@ import {
 } from "@mui/material";
 import { Variant } from "@mui/material/styles/createTypography";
 import { motion } from "framer-motion";
+import { projectTypes } from "../dataTypes";
+import Link from "next/link";
 
-function AboutMe() {
-  const Areas = [
-    "Web Frontend",
-    "Spreadsheets e scripts",
-    "Game making",
-    "Algoritmos em geral",
-  ];
+function AboutMe(props: { Areas: projectTypes[] }) {
+  const { Areas } = props;
   const isMdScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
@@ -35,7 +32,7 @@ function AboutMe() {
       }}
       viewport={{ once: true }}
       transition={{
-        duration:2
+        duration: 2,
       }}
     >
       <Box sx={{ maxWidth: isMdScreen ? "100%" : "70%" }}>
@@ -82,7 +79,9 @@ function AboutMe() {
               <ListItemAvatar>
                 <Icon icon="tabler:point-filled" />
               </ListItemAvatar>
-              <Typography variant="h6">{item}</Typography>
+              <Link href={`projetos/${item.name}`}>
+              <Typography variant="h6">{item.title}</Typography>
+              </Link>
             </ListItem>
           ))}
         </List>

@@ -14,7 +14,7 @@ export type sheetsFilter = {
   link?: string;
 };
 
-type sheetTab = "knowledge" | "projects" | "experiences" | "timeline";
+type sheetTab = "knowledge" | "projects" | "experiences" | "timeline" | "projectTypes";
 
 
 

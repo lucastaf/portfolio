@@ -2,7 +2,7 @@ import { Divider, Typography } from "@mui/material";
 import AboutMe from "./components/homeComponents/AboutMe";
 import Title from "./components/homeComponents/Title";
 import ExperienceAreas from "./components/pagesComponents/Knowledges";
-import { dataStatus, knowledge } from "./components/dataTypes";
+import { dataStatus, knowledge, projectTypes } from "./components/dataTypes";
 import getSheetTab from "./api/components/getSheetTab";
 //Lembrar de fazer:
 //Experiencias profissionais
@@ -10,7 +10,7 @@ import getSheetTab from "./api/components/getSheetTab";
 //Sobre mim
 //Timeline
 export default async function Home() {
-  const [KnowledgesData, dataStatus]: [knowledge[], dataStatus] =
+  const [KnowledgesData, dataStatus, projectAreas]: [knowledge[], dataStatus, projectTypes[]] =
     await getData();
 
   return (
@@ -22,19 +22,20 @@ export default async function Home() {
       </Typography>
       <ExperienceAreas knowledges={KnowledgesData} status={dataStatus} />
       <Divider sx={{ my: 5 }} />
-      <AboutMe />
+      <AboutMe Areas={projectAreas} />
     </>
   );
 }
 
-async function getData(): Promise<[knowledge[], dataStatus]> {
+async function getData(): Promise<[knowledge[], dataStatus, projectTypes[]]> {
   try {
-    const resAxios = await getSheetTab("knowledge", {
+    const resKnowledge = await getSheetTab("knowledge", {
       type: "Linguagem",
     });
+    const resAreas = await getSheetTab("projectTypes")
 
-    return [resAxios.data, "success"];
+    return [resKnowledge.data, "success", resAreas.data];
   } catch (e) {
-    return [[], "error"];
+    return [[], "error", []];
   }
 }
