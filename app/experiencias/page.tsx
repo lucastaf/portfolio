@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { dataStatus, experience, knowledge } from "../components/dataTypes";
 import axios from "axios";
 
-
 function ExperiencesPage() {
   const [experiencesData, setExperiencesData] = useState<experienceStateType>({
     companies: [],
@@ -57,7 +56,6 @@ function ExperiencesPage() {
       });
   }, []);
 
-  
   return (
     <Box>
       <Typography variant="h4" sx={{ mb: 2 }}>
@@ -74,22 +72,31 @@ function ExperiencesPage() {
         experiences={experiencesData?.education}
         status={experiencesData.status}
       />
-      <Divider sx={{mt:2}} />
+      <Divider sx={{ mt: 2 }} />
       <Typography variant="h3" sx={{ mt: 2 }}>
         Meus Conhecimentos:
       </Typography>
-      <Typography variant="h4" sx={{ mt: 2 }}>
+      <Typography variant="h4" sx={{ mt: 3, mb: 2 }}>
         Linguagens:
       </Typography>
-      <Knowledges knowledges={knowledgesData?.languages} status={knowledgesData.status} />
-      <Typography variant="h4" sx={{ mt: 2 }}>
+      <Knowledges
+        knowledges={knowledgesData?.languages}
+        status={knowledgesData.status}
+      />
+      <Typography variant="h4" sx={{ mt: 3, mb: 2 }}>
         Frameworks:
       </Typography>
-      <Knowledges knowledges={knowledgesData?.frameworks} status={knowledgesData.status} />
-      <Typography variant="h4" sx={{ mt: 2 }}>
+      <Knowledges
+        knowledges={knowledgesData?.frameworks}
+        status={knowledgesData.status}
+      />
+      <Typography variant="h4" sx={{ mt: 3, mb: 2 }}>
         Outros conhecimentos:
       </Typography>
-      <Knowledges knowledges={knowledgesData?.others} status={knowledgesData.status} />
+      <Knowledges
+        knowledges={knowledgesData?.others}
+        status={knowledgesData.status}
+      />
     </Box>
   );
 }

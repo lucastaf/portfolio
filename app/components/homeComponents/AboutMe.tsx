@@ -79,9 +79,11 @@ function AboutMe(props: { Areas: projectTypes[] }) {
               <ListItemAvatar>
                 <Icon icon="tabler:point-filled" />
               </ListItemAvatar>
-              <Link href={`projetos/${item.name}`}>
-              <Typography variant="h6">{item.title}</Typography>
-              </Link>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link href={`projetos/${item.name}`}>
+                  <Typography variant="h6">{item.title}</Typography>
+                </Link>
+              </motion.div>
             </ListItem>
           ))}
         </List>

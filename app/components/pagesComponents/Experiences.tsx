@@ -20,16 +20,17 @@ import Link from "next/link";
 
 function Experiences(props: { experiences: experience[]; status: dataStatus }) {
   const { experiences, status } = props;
-  const [dialogData, setDialogData] = useState<experience | null>(null);
+  const [dialogData, setDialogData] = useState<experience>();
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
   const isSmScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
   return (
     <Grid container>
       <Dialog
-        open={dialogData != null}
+        open={dialogOpen}
         onClose={() => {
-          setDialogData(null);
+          setDialogOpen(false);
         }}
       >
         <DialogContent>
@@ -71,6 +72,7 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
               style={{ marginBottom: 3, display: "flex", cursor: "pointer" }}
               onClick={() => {
                 setDialogData(item);
+                setDialogOpen(true)
               }}
             >
               <Image

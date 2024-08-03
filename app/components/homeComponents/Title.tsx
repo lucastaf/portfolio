@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Box,
@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 function Title() {
   const theme = useTheme();
@@ -46,12 +47,12 @@ function Title() {
             }}
             transition={{
               duration: 1,
-              delay:0.8
+              delay: 0.8,
             }}
           >
             <Typography
               variant="h5"
-            //textAlign="justify"
+              //textAlign="justify"
               //sx={{ textJustify: "inter-character" }}
             >
               Este portfolio tem como objetivo mostrar minhas experiencias
@@ -60,16 +61,25 @@ function Title() {
             </Typography>
           </motion.div>
           <Box sx={{ mt: 3, display: "flex", justifyContent: "right", gap: 3 }}>
-            <Tooltip title="Linkedin">
-              <IconButton>
-                <Icon fontSize={50} icon="mdi:linkedin" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Github">
-              <IconButton>
-                <Icon fontSize={50} icon="mdi:github" />
-              </IconButton>
-            </Tooltip>
+            <Link
+              href={
+                "https://www.linkedin.com/in/lucas-bittencourt-rauch-b40967243"
+              }
+              target="_blank"
+            >
+              <Tooltip title="Linkedin">
+                <IconButton>
+                  <Icon fontSize={50} icon="mdi:linkedin" />
+                </IconButton>
+              </Tooltip>
+            </Link>
+            <Link href={"https://github.com/lucastaf"} target="_blank">
+              <Tooltip title="Github">
+                <IconButton>
+                  <Icon fontSize={50} icon="mdi:github" />
+                </IconButton>
+              </Tooltip>
+            </Link>
           </Box>
         </Box>
       </Grid>
