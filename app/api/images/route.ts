@@ -3,6 +3,9 @@ import axios from "axios";
 const NodeCache = require("node-cache");
 const myCache = new NodeCache();
 
+///OBS : Essa rota não é mais usada, foi substituida pela proxy na CLOUDFLARE --- 
+///https://portfoliobucket.lucas-bittencourtrauch.workers.dev/
+
 export async function GET(request: NextRequest) {
   let authKey = myCache.get("BACKBLAZE_AUTH_TOKEN");
 

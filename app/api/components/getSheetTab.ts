@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export type sheetsFilter = {
   name?: string;
   icon?: string;

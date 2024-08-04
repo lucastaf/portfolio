@@ -1,6 +1,5 @@
 "use client"
 import { dataStatus, project } from "@/app/components/dataTypes";
-import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   Button,
@@ -35,7 +34,7 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
                     background: "rgba(128, 128, 128, 0.3)",
                     marginRight: 10,
                   }}
-                  src={getImagePath(item.icon)}
+                  src={item.icon}
                   width={300}
                   height={200}
                   alt={item.name}

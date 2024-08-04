@@ -1,7 +1,6 @@
 //linguagens - Javascript, css, html, python , c, c++, c#, java, php, vba, typescript
 "use client";
 import { dataStatus, knowledge } from "@/app/components/dataTypes";
-import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   CircularProgress,
@@ -39,7 +38,7 @@ function Knowledges(props: {
                 style={{ display: "flex" }}
               >
                 <Image
-                  src={getImagePath(item.icon)}
+                  src={item.icon}
                   width={80}
                   height={80}
                   alt={item.name}

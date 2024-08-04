@@ -13,6 +13,11 @@ module.exports = {
         hostname: "localhost",
         port: "3000",
       },
+      {
+        protocol: "https",
+        hostname: "portfoliobucket.lucas-bittencourtrauch.workers.dev",
+        port: "",
+      },
     ],
   },
 };

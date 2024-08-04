@@ -1,6 +1,5 @@
 "use client"
 import { dataStatus, experience } from "@/app/components/dataTypes";
-import getImagePath from "@/app/components/hooks/useImagePath";
 import {
   Box,
   Chip,
@@ -38,7 +37,7 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
             sx={{ display: "flex", flexWrap: isSmScreen ? "wrap" : "nowrap" }}
           >
             <Image
-              src={getImagePath(dialogData?.icon)}
+              src={dialogData?.icon ?? ""}
               width={isSmScreen ? 80 : 150}
               height={isSmScreen ? 80 : 150}
               alt={dialogData?.name ?? ""}
@@ -76,7 +75,7 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
               }}
             >
               <Image
-                src={getImagePath(item.icon)}
+                src={item.icon}
                 width={isSmScreen ? 60 : 100}
                 height={isSmScreen ? 60 : 100}
                 alt={item.name}

@@ -1,53 +1,52 @@
-"use client";
-
-import { dataStatus, experience, project } from "@/app/components/dataTypes";
-import { useEffect, useState } from "react";
+import {
+  dataStatus,
+  experience,
+  knowledge,
+  project,
+} from "@/app/components/dataTypes";
 import Projects from "@/app/components/pagesComponents/Projects";
-import axios from "axios";
 import Experiences from "@/app/components/pagesComponents/Experiences";
 import { Box, Divider } from "@mui/material";
+import getSheetTab from "@/app/api/components/getSheetTab";
+import KnowledgeHeader from "../../components/pagesComponents/knowledgeHeader";
 
-function DynamicKnowledge({ params }: { params: { knowledge: string } }) {
-  const [projectData, setProjectData] = useState<project[]>([]);
-  const [experienceData, setExperienceData] = useState<experience[]>([]);
-  const [experienceStatus, setExperienceStatus] =
-    useState<dataStatus>("loading");
-  const [projectStatus, setProjectStatus] = useState<dataStatus>("loading");
-  useEffect(() => {
-    axios
-      .get("/api/projects", {
-        params: {
-          knowledges: decodeURIComponent(params.knowledge),
-        },
-      })
-      .then((res) => {
-        setProjectData(res.data);
-        setProjectStatus("success")
-      }).catch(()=>{
-        setProjectStatus("error")
-      });
-    axios
-      .get("/api/experiences", {
-        params: {
-          knowledges: decodeURIComponent(params.knowledge),
-        },
-      })
-      .then((res) => {
-        setExperienceData(res.data);
-        setExperienceStatus("success");
-      })
-      .catch(() => {
-        setExperienceStatus("error");
-      });
-  }, [params.knowledge]);
+async function DynamicKnowledge({ params }: { params: { knowledge: string } }) {
+  const { knowledge } = params;
+  const [projectData, experienceData, knowledgeData, dataStatus] =
+    await getDynamicKnowledgesData(knowledge);
 
   return (
     <Box>
-      <Experiences experiences={experienceData} status={experienceStatus} />
-      <Divider sx={{ my: 5 }} />
-      <Projects projects={projectData} status={projectStatus} />
+      <KnowledgeHeader knowledgeData={knowledgeData} />
+      <Experiences experiences={experienceData} status={dataStatus} />
+      {projectData.length && experienceData.length ? (
+        <Divider sx={{ my: 5 }} />
+      ) : (
+        ""
+      )}
+      <Projects projects={projectData} status={dataStatus} />
     </Box>
   );
+}
+
+async function getDynamicKnowledgesData(
+  knowledge: string
+): Promise<[project[], experience[], knowledge, dataStatus]> {
+  try {
+    const projectData = await getSheetTab("projects", {
+      knowledges: '"' + decodeURIComponent(knowledge) + '"',
+    });
+    const experienceData = await getSheetTab("experiences", {
+      knowledges: '"' + decodeURIComponent(knowledge) + '"',
+    });
+    const knowledgeIcon = await getSheetTab("knowledge", {
+      name: "^" + decodeURIComponent(knowledge) + "$",
+    });
+
+    return [projectData, experienceData, knowledgeIcon[0] ?? {}, "success"];
+  } catch {
+    return [[], [], {} as knowledge, "error"];
+  }
 }
 
 export default DynamicKnowledge;
