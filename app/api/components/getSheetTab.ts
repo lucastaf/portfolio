@@ -23,10 +23,6 @@ export default async function getSheetTab(
   tab: sheetTab,
   filters?: sheetsFilter
 ) {
-  console.log(new URLSearchParams({
-    tab: tab,
-    ...(filters && { filter: JSON.stringify(filters) }),
-  }).toString(),)
   const URL: string = process.env.PORTFOLIO_API_URL ?? "";
   const resApi = await fetch(
     URL +
