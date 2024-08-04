@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function KnowledgeHeader({ knowledgeData }: { knowledgeData: knowledge }) {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
       <Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Image
@@ -19,12 +19,14 @@ function KnowledgeHeader({ knowledgeData }: { knowledgeData: knowledge }) {
           <Typography textAlign={"center"} variant="h3">
             {knowledgeData.name}
           </Typography>
-          <Rating
-            sx={{ color: (theme) => theme.palette.text.primary }}
-            value={knowledgeData.affinity}
-            readOnly
-            precision={0.1}
-          />
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Rating
+              sx={{ color: (theme) => theme.palette.text.primary }}
+              value={knowledgeData.affinity}
+              readOnly
+              precision={0.1}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>

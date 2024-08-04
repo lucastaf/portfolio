@@ -34,7 +34,7 @@ function Knowledges(props: {
             }}
             >
               <Link
-                href={`experiencias/${encodeURIComponent(item.name)}`}
+                href={`/experiencias/${encodeURIComponent(item.name)}`}
                 style={{ display: "flex" }}
               >
                 <Image

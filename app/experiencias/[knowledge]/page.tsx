@@ -22,7 +22,7 @@ async function DynamicKnowledge({ params }: { params: { knowledge: string } }) {
       {projectData.length && experienceData.length ? (
         <Divider sx={{ my: 5 }} />
       ) : (
-        ""
+        <></>
       )}
       <Projects projects={projectData} status={dataStatus} />
     </Box>
@@ -34,13 +34,31 @@ async function getDynamicKnowledgesData(
 ): Promise<[project[], experience[], knowledge, dataStatus]> {
   try {
     const projectData = await getSheetTab("projects", {
-      knowledges: '"' + decodeURIComponent(knowledge) + '"',
+      knowledges:
+        '"' +
+        decodeURIComponent(knowledge).replace(
+          /[-[\]{}()*+?.,\\^$|#\s]/g,
+          "\\$&"
+        ) +
+        '"',
     });
     const experienceData = await getSheetTab("experiences", {
-      knowledges: '"' + decodeURIComponent(knowledge) + '"',
+      knowledges:
+        '"' +
+        decodeURIComponent(knowledge).replace(
+          /[-[\]{}()*+?.,\\^$|#\s]/g,
+          "\\$&"
+        ) +
+        '"',
     });
     const knowledgeIcon = await getSheetTab("knowledge", {
-      name: "^" + decodeURIComponent(knowledge) + "$",
+      name:
+        "^" +
+        decodeURIComponent(knowledge).replace(
+          /[-[\]{}()*+?.,\\^$|#\s]/g,
+          "\\$&"
+        ) +
+        "$",
     });
 
     return [projectData, experienceData, knowledgeIcon[0] ?? {}, "success"];

@@ -51,7 +51,7 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
                 {dialogData?.role}
               </Typography>
               {dialogData?.knowledges.map((item, index) => (
-                <Link key={index} href={`experiencias/${encodeURIComponent(item)}`}>
+                <Link key={index} href={`/experiencias/${encodeURIComponent(item)}`}>
                   <Chip label={item} sx={{ mr: 1, mb: 1 }} />
                 </Link>
               ))}
