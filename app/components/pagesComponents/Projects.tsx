@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { dataStatus, project } from "@/app/components/dataTypes";
 import {
   Box,
@@ -41,13 +41,7 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
                 />
               </Link>
             )}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
+            <Box sx={{maxWidth:'100%'}}>
               <Box>
                 <Typography variant={isSmScreen ? "h5" : "h4"}>
                   {item.name}
@@ -59,8 +53,12 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
                   Status: {item.status}
                 </Typography>
                 {isMdScreen && (
-                  <Link href={item.link} target="_blank" style={{ marginTop: 10 }}>
-                    <Button size="small" sx={{p:0}} variant="text">
+                  <Link
+                    href={item.link}
+                    target="_blank"
+                    style={{ marginTop: 10 }}
+                  >
+                    <Button size="small" sx={{ p: 0 }} variant="text">
                       Link do projeto
                     </Button>
                   </Link>
@@ -69,7 +67,7 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
                   Descrição: {item.description}
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", mt: 2 }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2, gap:1 }}>
                 {!isSmScreen && (
                   <Typography variant="subtitle1">
                     Conhecimentos utilizados:{" "}
@@ -83,7 +81,6 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
                       href={`/experiencias/${encodeURIComponent(knowledge)}`}
                     >
                       <Button
-                        sx={isSmScreen ? { mr: 1 } : { ml: 1 }}
                         size="small"
                         variant="outlined"
                       >
