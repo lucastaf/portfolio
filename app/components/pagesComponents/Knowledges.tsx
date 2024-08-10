@@ -17,10 +17,7 @@ import { motion } from "framer-motion";
 //Frameworks - React, appScript, Next, dotnet, godot, gameMaker, Excel, Vs code, laravel
 //Procurar - Excel, gamemaker, appscript
 
-function Knowledges(props: {
-  knowledges?: knowledge[];
-  status: dataStatus;
-}) {
+function Knowledges(props: { knowledges?: knowledge[]; status: dataStatus }) {
   const { knowledges, status } = props;
   const theme = useTheme();
   return (
@@ -29,20 +26,23 @@ function Knowledges(props: {
         knowledges?.map((item, index) => (
           <Grid key={index} item lg={3} md={6} xs={12}>
             <motion.div
-            whileHover={{
-              scale:1.1
-            }}
+              whileHover={{
+                scale: 1.1,
+              }}
+              initial={{
+                opacity: 0,
+                x: -50,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
             >
               <Link
                 href={`/experiencias/${encodeURIComponent(item.name)}`}
                 style={{ display: "flex" }}
               >
-                <Image
-                  src={item.icon}
-                  width={80}
-                  height={80}
-                  alt={item.name}
-                />
+                <Image src={item.icon} width={80} height={80} alt={item.name} />
                 <Box sx={{ ml: 2 }}>
                   <Typography variant="h4">{item.name}</Typography>
                   <Rating

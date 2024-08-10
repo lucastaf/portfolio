@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { dataStatus, timeline } from "@/app/components/dataTypes";
 import {
   Timeline,
@@ -56,7 +56,7 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
         </DialogContent>
       </Dialog>
       {status == "success" ? (
-        <Timeline position="alternate" sx={{padding:0}}>
+        <Timeline position="alternate" sx={{ padding: 0 }}>
           {data.map((item, index) => (
             <TimelineItem key={index}>
               <TimelineSeparator>
@@ -75,6 +75,17 @@ function TimeLineComponent(props: { data: timeline[]; status: dataStatus }) {
                 <motion.div
                   style={{
                     transformOrigin: index % 2 ? "center right" : "center left",
+                  }}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 ? 50 : -50,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  transition={{
+                    delay: index / 10,
                   }}
                   whileHover={{
                     scale: 1.1,

@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import ErrorComponent from "../ErrorComponents";
 
 function Projects(props: { projects: project[]; status: dataStatus }) {
@@ -24,74 +25,86 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
     <Box>
       {status == "success" ? (
         projects.map((item, index) => (
-          <Box key={index} sx={{ mb: isSmScreen ? 5 : 3, display: "flex" }}>
-            {!isMdScreen && (
-              <Link href={item.link} target="_blank">
-                <Image
-                  style={{
-                    objectFit: "scale-down",
-                    border: "1px solid white",
-                    background: "rgba(128, 128, 128, 0.3)",
-                    marginRight: 10,
-                  }}
-                  src={item.icon}
-                  width={300}
-                  height={200}
-                  alt={item.name}
-                />
-              </Link>
-            )}
-            <Box sx={{maxWidth:'100%'}}>
-              <Box>
-                <Typography variant={isSmScreen ? "h5" : "h4"}>
-                  {item.name}
-                </Typography>
-                <Typography variant={isSmScreen ? "subtitle1" : "h6"}>
-                  Criado em: {item.time}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Status: {item.status}
-                </Typography>
-                {isMdScreen && (
-                  <Link
-                    href={item.link}
-                    target="_blank"
-                    style={{ marginTop: 10 }}
-                  >
-                    <Button size="small" sx={{ p: 0 }} variant="text">
-                      Link do projeto
-                    </Button>
-                  </Link>
-                )}
-                <Typography variant="subtitle1">
-                  Descrição: {item.description}
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2, gap:1 }}>
-                {!isSmScreen && (
-                  <Typography variant="subtitle1">
-                    Conhecimentos utilizados:{" "}
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -50
+            }}
+            animate={{
+              opacity:1,
+              x: 0
+            }}
+            transition={{
+              duration: 0.235,
+              delay: index/10
+            }}
+          >
+            <Box key={index} sx={{ mb: isSmScreen ? 5 : 3, display: "flex" }}>
+              {!isMdScreen && (
+                <Link href={item.link} target="_blank">
+                  <Image
+                    style={{
+                      objectFit: "scale-down",
+                      border: "1px solid white",
+                      background: "rgba(128, 128, 128, 0.3)",
+                      marginRight: 10,
+                    }}
+                    src={item.icon}
+                    width={300}
+                    height={200}
+                    alt={item.name}
+                  />
+                </Link>
+              )}
+              <Box sx={{ maxWidth: "100%" }}>
+                <Box>
+                  <Typography variant={isSmScreen ? "h5" : "h4"}>
+                    {item.name}
                   </Typography>
-                )}
-                {item.knowledges.map((knowledge, index) => {
-                  knowledge = knowledge.trim();
-                  return (
+                  <Typography variant={isSmScreen ? "subtitle1" : "h6"}>
+                    Criado em: {item.time}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Status: {item.status}
+                  </Typography>
+                  {isMdScreen && (
                     <Link
-                      key={index}
-                      href={`/experiencias/${encodeURIComponent(knowledge)}`}
+                      href={item.link}
+                      target="_blank"
+                      style={{ marginTop: 10 }}
                     >
-                      <Button
-                        size="small"
-                        variant="outlined"
-                      >
-                        {knowledge}
+                      <Button size="small" sx={{ p: 0 }} variant="text">
+                        Link do projeto
                       </Button>
                     </Link>
-                  );
-                })}
+                  )}
+                  <Typography variant="subtitle1">
+                    Descrição: {item.description}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2, gap: 1 }}>
+                  {!isSmScreen && (
+                    <Typography variant="subtitle1">
+                      Conhecimentos utilizados:{" "}
+                    </Typography>
+                  )}
+                  {item.knowledges.map((knowledge, index) => {
+                    knowledge = knowledge.trim();
+                    return (
+                      <Link
+                        key={index}
+                        href={`/experiencias/${encodeURIComponent(knowledge)}`}
+                      >
+                        <Button size="small" variant="outlined">
+                          {knowledge}
+                        </Button>
+                      </Link>
+                    );
+                  })}
+                </Box>
               </Box>
             </Box>
-          </Box>
+          </motion.div>
         ))
       ) : status == "loading" ? (
         <Box sx={{ display: "flex", justifyContent: "center" }}>

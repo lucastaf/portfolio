@@ -27,7 +27,7 @@ async function ExperiencesPage() {
         status={experiencesData.status}
       />
       <Divider sx={{ mt: 2 }} />
-      <Typography variant="h3" sx={{ mt: 2 }}>
+      <Typography variant="h3" sx={{ mt: 2, fontSize:40 }}>
         Meus Conhecimentos:
       </Typography>
       <Typography variant="h4" sx={{ mt: 3, mb: 2 }}>

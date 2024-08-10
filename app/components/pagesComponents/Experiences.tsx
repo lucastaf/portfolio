@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { dataStatus, experience } from "@/app/components/dataTypes";
 import {
   Box,
@@ -20,7 +20,7 @@ import Link from "next/link";
 function Experiences(props: { experiences: experience[]; status: dataStatus }) {
   const { experiences, status } = props;
   const [dialogData, setDialogData] = useState<experience>();
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const isSmScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
@@ -31,6 +31,7 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
         onClose={() => {
           setDialogOpen(false);
         }}
+        disableScrollLock
       >
         <DialogContent>
           <Box
@@ -51,7 +52,10 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
                 {dialogData?.role}
               </Typography>
               {dialogData?.knowledges.map((item, index) => (
-                <Link key={index} href={`/experiencias/${encodeURIComponent(item)}`}>
+                <Link
+                  key={index}
+                  href={`/experiencias/${encodeURIComponent(item)}`}
+                >
                   <Chip label={item} sx={{ mr: 1, mb: 1 }} />
                 </Link>
               ))}
@@ -68,10 +72,16 @@ function Experiences(props: { experiences: experience[]; status: dataStatus }) {
               whileHover={{
                 scale: 1.1,
               }}
+              initial={{
+                scale: 0,
+              }}
+              animate={{
+                scale: 1,
+              }}
               style={{ marginBottom: 3, display: "flex", cursor: "pointer" }}
               onClick={() => {
                 setDialogData(item);
-                setDialogOpen(true)
+                setDialogOpen(true);
               }}
             >
               <Image
