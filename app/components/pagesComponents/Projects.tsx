@@ -26,20 +26,21 @@ function Projects(props: { projects: project[]; status: dataStatus }) {
       {status == "success" ? (
         projects.map((item, index) => (
           <motion.div
+            key={index}
             initial={{
               opacity: 0,
-              x: -50
+              x: -50,
             }}
             animate={{
-              opacity:1,
-              x: 0
+              opacity: 1,
+              x: 0,
             }}
             transition={{
               duration: 0.235,
-              delay: index/10
+              delay: index / 10,
             }}
           >
-            <Box key={index} sx={{ mb: isSmScreen ? 5 : 3, display: "flex" }}>
+            <Box sx={{ mb: isSmScreen ? 5 : 3, display: "flex" }}>
               {!isMdScreen && (
                 <Link href={item.link} target="_blank">
                   <Image
