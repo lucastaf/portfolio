@@ -20,7 +20,7 @@ export default async function Home() {
         Experiência em:
       </Typography>
       <Typography variant="body2" marginBottom={2}>
-        Estrelas representam "nível de afinidade", sendo 5 estrelas as
+        Estrelas representam nível de afinidade, sendo 5 estrelas as
         linguagens que tenho mais experiência e 1 estrela linguagens que não estou muito abituado.
       </Typography>
       <ExperienceAreas knowledges={KnowledgesData} status={dataStatus} />
