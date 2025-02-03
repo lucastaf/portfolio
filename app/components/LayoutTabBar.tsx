@@ -90,10 +90,6 @@ const LinkItens: { name: string; link: string }[] = [
     link: "/projetos",
   },
   {
-    name: "Timeline",
-    link: "/timeline",
-  },
-  {
     name: "Contato",
     link: "/contato",
   },
