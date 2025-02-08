@@ -43,10 +43,9 @@ function AboutMe(props: { Areas: projectTypes[] }) {
           sx={{ textJustify: "inter-character" }}
         >
           <Icon icon="ic:twotone-play-arrow" fontSize={"1.3em"} /> Sou
-          programador e estudante de Ciências da computação, possuo ampla
-          experiência no desenvolvimento de projetos, tanto profissionais quanto
-          pessoais. Atualmente trabalho como desenvolvedor FrontEnd em React,
-          onde desenvolvi uma grande afinidade com a linguagem JavaScript.
+          programador e estudante de Ciencias da computação, possuo ampla
+          experiência no desenvolviemnto de projetos, tanto profissionais quanto
+          pessoais.
         </Typography>
         <Typography
           variant={textVaraitn}
@@ -70,8 +69,58 @@ function AboutMe(props: { Areas: projectTypes[] }) {
           médio aprofundei meus estudos na área, consequentemente obtive maior
           facilidade em dominar os algoritmos de programação.
         </Typography>
+        <Typography
+          variant={textVaraitn}
+          textAlign="justify"
+          sx={{ textJustify: "inter-character" }}
+        >
+          <Icon icon="ic:twotone-play-arrow" fontSize={30} /> Tenho uma grande
+          versatilidade com modelos de trabalhos, posso trabalhar como PJ ou
+          CLT, horário fixo ou por demanda. Ja trabalhei com modelos de
+          metodologia ágil.
+        </Typography>
+        <Typography variant="h4" sx={{ mt: 13, mb: 5 }}>
+          Áreas que tenho mais proficiência :
+        </Typography>
+        <Box sx={{ display: "grid", gap: 3 }}>
+          <Typography
+            variant={textVaraitn}
+            textAlign="justify"
+            sx={{ textJustify: "inter-character" }}
+          >
+            <Icon icon="ic:twotone-play-arrow" fontSize={30} /> Web Fullstack:
+            Atualmente, é a área que tenho mais dominio, onde ja atuei
+            profissionalmente como Dev Frontend React. Ja desenvolvi também
+            diversas aplicações com front e backend para projetos pessoais e
+            trabalhos de faculdade.
+          </Typography>
+          <Typography
+            variant={textVaraitn}
+            textAlign="justify"
+            sx={{ textJustify: "inter-character" }}
+          >
+            <Icon icon="ic:twotone-play-arrow" fontSize={30} /> Automações e
+            planilhas: Ja fiz automações como atividade secundária em outros
+            empregos, onde desenvolvi automações que facilitavam o trabalho de
+            diversos setores. Desenvolvo automações de sistema feitas
+            diretamente em python e ou automações de planihas (Excel em VBA,
+            Google Sheets em AppScript)
+          </Typography>
+          <Typography
+            variant={textVaraitn}
+            textAlign="justify"
+            sx={{ textJustify: "inter-character" }}
+          >
+            <Icon icon="ic:twotone-play-arrow" fontSize={30} /> Aplicações
+            orientada a objetos: Sou grande entusiasta em linguagens como C# e Java, ja
+            usei em vários de meus projetos, principalmente na parte de Game
+            Making (Unity e Godot em C#). Além disso, ja usei POO para criação
+            de diversos algoritmos.
+          </Typography>
+        </Box>
+
         <Typography variant="h6" sx={{ mt: 3, ml: isMdScreen ? 0 : 3 }}>
-          Atualmente as áreas nas quais ja trabalhei ou estudei sobre foram:
+          Listo meus projetos pessoais separados por essas áreas abaixo:
         </Typography>
         <List>
           {Areas.map((item, index) => (
