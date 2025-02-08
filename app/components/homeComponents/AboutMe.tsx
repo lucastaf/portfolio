@@ -55,7 +55,7 @@ function AboutMe(props: { Areas: projectTypes[] }) {
           <Icon icon="ic:twotone-play-arrow" fontSize={30} /> Me destaco na
           adaptação com linguagens que não tive experiências previas. Em minhas
           últimas experiências, tive uma grande facilidade de aprender uma
-          linguagem ou uma framework quando me foi necessário, conseguindo
+          linguagem ou um framework quando me foi necessário, conseguindo
           dominar uma ferramenta nova dentro de poucas semanas.
         </Typography>
         <Typography
